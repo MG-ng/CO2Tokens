@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/navigation_overview">
+
+    <fragment
+        android:id="@+id/navigation_overview"
+        android:name="org.co2tokens.app.ui.overview.OverviewFragment"
+        android:label="@string/title_overview"
+        tools:layout="@layout/fragment_burn" />
+
+    <fragment
+        android:id="@+id/navigation_transfer"
+        android:name="org.co2tokens.app.ui.transfer.TransferFragment"
+        android:label="@string/title_transfer"
+        tools:layout="@layout/fragment_transfer" />
+
+    <fragment
+        android:id="@+id/navigation_burn"
+        android:name="org.co2tokens.app.ui.burn.BurnFragment"
+        android:label="@string/title_burn"
+        tools:layout="@layout/fragment_burn" />
+</navigation>
