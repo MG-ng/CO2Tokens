@@ -1,4 +1,4 @@
-package org.co2tokens.app.ui.transact;
+package com.example.co2tokens.ui.transact;
 
 import android.graphics.Bitmap;
 import android.graphics.Color;

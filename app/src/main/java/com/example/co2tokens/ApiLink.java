@@ -1,12 +1,12 @@
-package org.co2tokens.app;
+package com.example.co2tokens;
 
 import android.content.Context;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 import android.util.Log;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 
@@ -16,17 +16,31 @@ import org.json.JSONObject;
 public class ApiLink {
 
     private static final String TAG = ApiLink.class.getCanonicalName();
-    private final Context context;
+    private Context context;
+    SharedPreferences sharedPref;
 
-    private ApiLink( Context context ) {
-        this.context = context;
-    }
 
     public static ApiLink getInstance( Context context ) {
         if( context != null ) {
             return new ApiLink( context );
         }
         return null;
+    }
+
+
+    private ApiLink( Context context ) {
+        this.context = context;
+
+        sharedPref = PreferenceManager.getDefaultSharedPreferences( context );
+
+        if( sharedPref.getString( "mnemonic", "" ).isEmpty() ) {
+            initWallet();
+        }
+    }
+
+
+    private void initWallet() {
+
     }
 
 
@@ -46,29 +60,23 @@ public class ApiLink {
         }
 
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest( Request.Method.POST, postUrl, postData,
-                new Response.Listener<JSONObject>() {
-                    @Override
-                    public void onResponse( JSONObject response ) {
-                        Log.i( TAG, response.toString() );
-                        try {
-                            back.pushBalance( response.getDouble( "Key" ) );
-                        } catch( JSONException e ) {
-                            e.printStackTrace();
-                        } catch( NullPointerException e ) {
-                            e.printStackTrace();
-                        }
+                response -> {
+                    Log.i( TAG, response.toString() );
+                    try {
+                        back.pushBalance( response.getDouble( "Key" ) );
+                    } catch( JSONException e ) {
+                        e.printStackTrace();
+                    } catch( NullPointerException e ) {
+                        e.printStackTrace();
                     }
                 },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse( VolleyError error ) {
-                        error.printStackTrace();
-                    }
-                }
+                error -> error.printStackTrace()
         );
 
         requestQueue.add(jsonObjectRequest);
     }
+
+
 
 
     public interface OverviewCallback {

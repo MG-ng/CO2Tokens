@@ -1,6 +1,9 @@
 <resources>
     <string name="app_name">CO2 Tokens</string>
+    <string name="preference_file_key">com.example.co2_tokens.PREFERENCE_FILE_KEY</string>
+
     <string name="title_overview">Overview</string>
     <string name="title_transact">Transact</string>
     <string name="title_burn">Burn</string>
+
 </resources>

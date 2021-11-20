@@ -13,7 +13,7 @@
 
     <item
         android:id="@+id/navigation_burn"
-        android:icon="@drawable/ic_baseline_local_fire_department_24"
+        android:icon="@drawable/ic_baseline_fire_24"
         android:title="@string/title_burn" />
 
 </menu>

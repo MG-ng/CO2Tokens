@@ -1,4 +1,4 @@
-package org.co2tokens.app;
+package com.example.co2tokens;
 
 import static org.junit.Assert.assertEquals;
 

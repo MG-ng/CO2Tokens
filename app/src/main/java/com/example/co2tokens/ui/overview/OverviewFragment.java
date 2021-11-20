@@ -1,4 +1,4 @@
-package org.co2tokens.app.ui.overview;
+package com.example.co2tokens.ui.overview;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -27,8 +27,10 @@ public class OverviewFragment extends Fragment {
 
         final TextView balanceOverview = binding.balanceOverview;
         overviewViewModel.getBalance().observe( getViewLifecycleOwner(), balanceOverview::setText );
-        final TextView txsView = binding.txs;
-        overviewViewModel.getTxs().observe( getViewLifecycleOwner(), txsView::setText );
+
+        // TODO: Put real txs in there
+//        final TextView txsView = binding.txs;
+//        overviewViewModel.getTxs().observe( getViewLifecycleOwner(), txsView::setText );
 
         return root;
     }

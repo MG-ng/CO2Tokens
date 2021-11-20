@@ -1,16 +1,16 @@
-package org.co2tokens.app.ui.burn;
+package com.example.co2tokens.ui.transact;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-public class BurnViewModel extends ViewModel {
+public class TransactViewModel extends ViewModel {
 
     private MutableLiveData<String> mText;
 
-    public BurnViewModel() {
+    public TransactViewModel() {
         mText = new MutableLiveData<>();
-        mText.setValue( "0.00" );
+        mText.setValue( "bc1q... generating" );
     }
 
     public LiveData<String> getText() {

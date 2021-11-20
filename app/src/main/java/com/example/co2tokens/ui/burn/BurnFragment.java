@@ -1,4 +1,4 @@
-package org.co2tokens.app.ui.burn;
+package com.example.co2tokens.ui.burn;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;

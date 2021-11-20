@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.burn.BurnFragment">
+    tools:context="com.example.co2tokens.ui.burn.BurnFragment">
 
     <ScrollView
         android:layout_width="match_parent"

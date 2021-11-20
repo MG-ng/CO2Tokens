@@ -1,4 +1,4 @@
-package org.co2tokens.app.ui.overview;
+package com.example.co2tokens.ui.overview;
 
 import android.app.Application;
 
@@ -6,7 +6,7 @@ import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
-import org.co2tokens.app.ApiLink;
+import com.example.co2tokens.ApiLink;
 
 public class OverviewViewModel extends AndroidViewModel implements ApiLink.OverviewCallback {
 
@@ -19,7 +19,7 @@ public class OverviewViewModel extends AndroidViewModel implements ApiLink.Overv
         super( application );
 
         mBalance = new MutableLiveData<>();
-        mBalance.setValue( "loading" );
+        mBalance.setValue( "loading..." );
 
         mTxs = new MutableLiveData<>();
         mTxs.setValue( "{ Some API Content }" );

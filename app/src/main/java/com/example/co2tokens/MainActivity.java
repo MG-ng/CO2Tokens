@@ -1,4 +1,4 @@
-package org.co2tokens.app;
+package com.example.co2tokens;
 
 import android.os.Bundle;
 
@@ -10,6 +10,7 @@ import androidx.navigation.ui.NavigationUI;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+import org.co2tokens.app.R;
 import org.co2tokens.app.databinding.ActivityMainBinding;
 
 public class MainActivity extends AppCompatActivity {

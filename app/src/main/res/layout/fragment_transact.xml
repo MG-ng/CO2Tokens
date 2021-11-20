@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".ui.transact.TransactFragment"
+    tools:context="com.example.co2tokens.ui.transact.TransactFragment"
     >
 
     <LinearLayout

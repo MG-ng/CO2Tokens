@@ -14,7 +14,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.CO2Tokens">
         <activity
-            android:name="org.co2tokens.app.MainActivity"
+            android:name="com.example.co2tokens.MainActivity"
             android:exported="true"
             android:label="@string/app_name">
             <intent-filter>
