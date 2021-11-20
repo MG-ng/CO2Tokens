@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".ui.transfer.TransferFragment"
+    tools:context=".ui.transact.TransactFragment"
     >
 
     <LinearLayout
@@ -65,11 +65,13 @@
                         android:id="@+id/send_amount"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:inputType="numberDecimal"
                         />
 
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <Button
+                    android:id="@+id/send_confirm"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/activity_horizontal_margin"
@@ -87,26 +89,27 @@
             android:layout_margin="@dimen/activity_horizontal_margin"
             >
 
-            <LinearLayout
+            <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 >
 
-            <TextView
-                    android:id="@+id/text_receive"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textSize="20sp"
-                    android:layout_margin="@dimen/activity_horizontal_margin"
-                    android:textStyle="bold"
-                    android:text="Receive CO2 Token"
-                    />
+                <TextView
+                        android:id="@+id/text_receive"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textSize="20sp"
+                        android:layout_margin="@dimen/activity_horizontal_margin"
+                        android:textStyle="bold"
+                        android:text="Receive CO2 Token"
+                        />
 
                 <TextView
                     android:id="@+id/view_my_address"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_below="@id/text_receive"
                     android:textAlignment="center"
                     android:layout_gravity="center_horizontal"
                     android:layout_margin="@dimen/activity_horizontal_margin"
@@ -114,7 +117,19 @@
                     android:text="bc1q...   :QRCode:"
                     />
 
-            </LinearLayout>
+                <ImageView
+                    android:id="@+id/qr_code_show"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/activity_horizontal_margin"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_below="@id/text_receive"
+                    android:contentDescription="Watch QR Code for address"
+                    android:src="@drawable/ic_baseline_qr_code_24"
+                    />
+
+            </RelativeLayout>
 
         </androidx.cardview.widget.CardView>
 

@@ -1,16 +1,16 @@
-package org.co2tokens.app.ui.transfer;
+package org.co2tokens.app.ui.transact;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-public class TransferViewModel extends ViewModel {
+public class TransactViewModel extends ViewModel {
 
     private MutableLiveData<String> mText;
 
-    public TransferViewModel() {
+    public TransactViewModel() {
         mText = new MutableLiveData<>();
-        mText.setValue( "This is dashboard fragment" );
+        mText.setValue( "bc1q... generating" );
     }
 
     public LiveData<String> getText() {

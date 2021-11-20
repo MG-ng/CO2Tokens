@@ -12,10 +12,10 @@
         tools:layout="@layout/fragment_burn" />
 
     <fragment
-        android:id="@+id/navigation_transfer"
-        android:name="org.co2tokens.app.ui.transfer.TransferFragment"
-        android:label="@string/title_transfer"
-        tools:layout="@layout/fragment_transfer" />
+        android:id="@+id/navigation_transact"
+        android:name="org.co2tokens.app.ui.transact.TransactFragment"
+        android:label="@string/title_transact"
+        tools:layout="@layout/fragment_transact" />
 
     <fragment
         android:id="@+id/navigation_burn"

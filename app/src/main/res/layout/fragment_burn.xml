@@ -106,7 +106,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:gravity="center"
-                        android:text="BMV burnt"
+                        android:text="BMV"
                         />
                     <TextView
                         android:layout_width="wrap_content"
@@ -175,6 +175,7 @@
             android:id="@+id/burn_amount"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:inputType="numberDecimal"
             />
 
     </com.google.android.material.textfield.TextInputLayout>
@@ -187,7 +188,5 @@
         android:layout_alignParentBottom="true"
         android:text="Burn"
         />
-    <!-- TODO: show where the tokens have been sent to in a popup-->
-
 
 </RelativeLayout>
