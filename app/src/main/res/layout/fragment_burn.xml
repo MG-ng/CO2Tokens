@@ -26,18 +26,18 @@
                 android:layout_margin="@dimen/activity_horizontal_margin"
                 android:textSize="20sp"
                 android:textStyle="bold"
-                android:text="Reasoning behind the burning"
+                android:text="Why burning?"
                 />
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/activity_horizontal_margin"
-                android:text="To shrink the supply you have to burn the tokens...\n\nMore coming"
+                android:text="CO2 emissions are only compensated if you destroy tokens by burning them on the blockchain."
                 />
 
             <TextView
-                android:id="@+id/text_burn_recent"
+                android:id="@+id/text_burn_history"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/activity_horizontal_margin"
@@ -45,41 +45,78 @@
                 android:gravity="center_horizontal"
                 android:textSize="20sp"
                 android:textStyle="bold"
-                android:text="Recent Burnings"
+                android:text="Burning History:"
                 />
 
             <!-- TODO: Replace with RecyclerView and correct data -->
-            <TextView
-                android:id="@+id/burn_example_block"
-                android:layout_width="wrap_content"
+            <TableLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/activity_horizontal_margin"
-                android:text="Block 800000:"
-                />
-            <TextView
-                android:id="@+id/burn_example_company"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="@dimen/activity_horizontal_margin"
-                android:layout_gravity="end"
-                android:text="XY AG"
-                />
+                android:stretchColumns="1"
+                >
 
-            <TextView
-                android:id="@+id/burn_example_block2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/activity_horizontal_margin"
-                android:text="Block 810000:"
-                />
-            <TextView
-                android:id="@+id/burn_example_company2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="@dimen/activity_horizontal_margin"
-                android:layout_gravity="end"
-                android:text="YZ Inc"
-                />
+                <TableRow>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="@dimen/activity_horizontal_margin"
+                        android:text="19.11.21"
+                        />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="Macrosoft Inc"
+                        />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="end"
+                        android:text="1000 CO2t"
+                        />
+                </TableRow>
+                <TableRow>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="@dimen/activity_horizontal_margin"
+                        android:text="15.11.21"
+                        />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="Bawaria State"
+                        />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="end"
+                        android:text="2000 CO2t"
+                        />
+                </TableRow>
+                <TableRow>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="@dimen/activity_horizontal_margin"
+                        android:text="15.11.21"
+                        />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="BMV burnt"
+                        />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="end"
+                        android:text="500 CO2t"
+                        />
+                </TableRow>
+
+            </TableLayout>
 
         </LinearLayout>
 
@@ -90,13 +127,38 @@
         android:id="@+id/text_burn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_above="@id/burn_available_view"
         android:layout_margin="@dimen/activity_horizontal_margin"
-        android:layout_above="@id/burn_amount_layout"
         android:textAlignment="center"
         android:gravity="center_horizontal"
         android:textSize="20sp"
         android:textStyle="bold"
-        android:text="Burn Tokens"
+        android:text="Burn CO2 Tokens"
+        />
+
+    <TextView
+        android:id="@+id/burn_available_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/burn_amount_layout"
+        android:layout_marginLeft="@dimen/activity_horizontal_margin"
+        android:layout_marginStart="@dimen/activity_horizontal_margin"
+        android:layout_marginRight="@dimen/activity_horizontal_margin"
+        android:layout_marginEnd="@dimen/activity_horizontal_margin"
+        android:text="Available: "
+        />
+
+    <TextView
+        android:id="@+id/burn_available"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/burn_amount_layout"
+        android:layout_marginLeft="@dimen/activity_horizontal_margin"
+        android:layout_marginStart="@dimen/activity_horizontal_margin"
+        android:layout_marginRight="@dimen/activity_horizontal_margin"
+        android:layout_marginEnd="@dimen/activity_horizontal_margin"
+        android:gravity="end"
+        android:text="0"
         />
 
     <com.google.android.material.textfield.TextInputLayout
@@ -104,6 +166,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/activity_horizontal_margin"
+        android:layout_marginTop="0dp"
         android:layout_above="@id/burn_confirm"
         android:hint="Amount"
         >
@@ -124,6 +187,7 @@
         android:layout_alignParentBottom="true"
         android:text="Burn"
         />
+    <!-- TODO: show where the tokens have been sent to in a popup-->
 
 
 </RelativeLayout>

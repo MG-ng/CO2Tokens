@@ -10,7 +10,7 @@ public class BurnViewModel extends ViewModel {
 
     public BurnViewModel() {
         mText = new MutableLiveData<>();
-        mText.setValue( "This is notifications fragment" );
+        mText.setValue( "0.00" );
     }
 
     public LiveData<String> getText() {

@@ -25,9 +25,36 @@ public class BurnFragment extends Fragment {
         binding = FragmentBurnBinding.inflate( inflater, container, false );
         View root = binding.getRoot();
 
-        final TextView textView = binding.textBurnRecent;
-        burnViewModel.getText().observe( getViewLifecycleOwner(), textView::setText );
+        final TextView availableView = binding.burnAvailable;
+        burnViewModel.getText().observe( getViewLifecycleOwner(), availableView::setText );
+
         return root;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        /*
+        binding.burnConfirm.setOnClickListener( view -> {
+            new AlertDialog.Builder( getActivity() )
+                    .setTitle( "Burn address" )
+                    .setMessage( "Your specified amount was sent to:" +
+                            "\n\n ")
+
+                    // Specifying a listener allows you to take an action before dismissing the dialog.
+                    // The dialog is automatically dismissed when a dialog button is clicked.
+                    .setPositiveButton( android.R.string.yes, new DialogInterface.OnClickListener() {
+                        public void onClick( DialogInterface dialog, int which ) {
+                            // Continue with delete operation
+                        }
+                    } )
+
+                    // A null listener allows the button to dismiss the dialog and take no further action.
+                    .setNegativeButton( android.R.string.no, null )
+                    .setIcon( android.R.drawable.ic_dialog_alert )
+                    .show();
+        } );
+        */
     }
 
     @Override
@@ -35,4 +62,6 @@ public class BurnFragment extends Fragment {
         super.onDestroyView();
         binding = null;
     }
+
+
 }
