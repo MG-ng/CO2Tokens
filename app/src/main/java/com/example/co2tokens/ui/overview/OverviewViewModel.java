@@ -55,7 +55,7 @@ public class OverviewViewModel extends AndroidViewModel implements ApiLink.Balan
 
     @Override
     public void pushCO2Balance( double balance ) {
-        co2Balance.postValue( balance + " CO2T" );
+        co2Balance.postValue( balance + " CO2t" );
     }
 
     @Override

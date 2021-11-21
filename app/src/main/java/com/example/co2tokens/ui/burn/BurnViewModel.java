@@ -47,7 +47,7 @@ public class BurnViewModel extends AndroidViewModel implements CO2BalanceCallbac
 
     @Override
     public void pushCO2Balance( double balance ) {
-        mAvailable.postValue( balance + " CO2T" );
+        mAvailable.postValue( balance + " CO2t" );
     }
 
     @Override
