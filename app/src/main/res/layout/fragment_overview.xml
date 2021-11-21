@@ -33,6 +33,19 @@
         android:text="Balance"
         />
 
+    <ImageView
+        android:id="@+id/open_in_browser"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/activity_horizontal_margin"
+        android:layout_below="@id/balance_overview_title"
+        android:layout_above="@id/scroll_txs"
+        android:layout_toRightOf="@id/balance_overview"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:src="@drawable/ic_baseline_open_in_browser_24"
+        />
+
     <ScrollView
         android:id="@+id/scroll_txs"
         android:layout_width="match_parent"

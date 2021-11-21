@@ -8,7 +8,7 @@ import androidx.lifecycle.MutableLiveData;
 
 import com.example.co2tokens.ApiLink;
 
-public class BurnViewModel extends AndroidViewModel implements ApiLink.OverviewCallback {
+public class BurnViewModel extends AndroidViewModel implements ApiLink.BalanceCallback {
 
     private ApiLink link;
 
@@ -20,9 +20,7 @@ public class BurnViewModel extends AndroidViewModel implements ApiLink.OverviewC
 
         link = ApiLink.getInstance( getApplication().getApplicationContext() );
 
-
         link.getBalance( this, false );
-
         mAvailable = new MutableLiveData<>();
     }
 
@@ -36,7 +34,7 @@ public class BurnViewModel extends AndroidViewModel implements ApiLink.OverviewC
     }
 
     @Override
-    public void pushTxs( String txs ) {
+    public void pushError( Error e ) {
 
     }
 }

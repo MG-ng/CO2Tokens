@@ -22,6 +22,8 @@ import com.google.zxing.qrcode.QRCodeWriter;
 import org.co2tokens.app.R;
 import org.co2tokens.app.databinding.FragmentTransactBinding;
 
+
+
 public class TransactFragment extends Fragment {
 
     private TransactViewModel transactViewModel;
@@ -29,14 +31,16 @@ public class TransactFragment extends Fragment {
 
     public View onCreateView( @NonNull LayoutInflater inflater,
                               ViewGroup container, Bundle savedInstanceState ) {
+
         transactViewModel =
                 new ViewModelProvider( this ).get( TransactViewModel.class );
 
         binding = FragmentTransactBinding.inflate( inflater, container, false );
         View root = binding.getRoot();
 
+
         final TextView textView = binding.viewMyAddress;
-        transactViewModel.getText().observe( getViewLifecycleOwner(), textView::setText );
+        transactViewModel.getAddress().observe( getViewLifecycleOwner(), textView::setText );
 
 
 
@@ -50,6 +54,7 @@ public class TransactFragment extends Fragment {
             alert.setCancelable( true );
             alert.show();
         } );
+
 
         return root;
     }

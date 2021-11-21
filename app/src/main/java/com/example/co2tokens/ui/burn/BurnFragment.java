@@ -20,7 +20,8 @@ public class BurnFragment extends Fragment {
     public View onCreateView( @NonNull LayoutInflater inflater,
                               ViewGroup container, Bundle savedInstanceState ) {
 
-        burnViewModel = new ViewModelProvider( this ).get( BurnViewModel.class );
+        burnViewModel =
+                new ViewModelProvider( this ).get( BurnViewModel.class );
 
         binding = FragmentBurnBinding.inflate( inflater, container, false );
         View root = binding.getRoot();

@@ -8,7 +8,7 @@ import androidx.lifecycle.MutableLiveData;
 
 import com.example.co2tokens.ApiLink;
 
-public class OverviewViewModel extends AndroidViewModel implements ApiLink.OverviewCallback {
+public class OverviewViewModel extends AndroidViewModel implements ApiLink.BalanceCallback {
 
     private ApiLink link;
 
@@ -46,7 +46,7 @@ public class OverviewViewModel extends AndroidViewModel implements ApiLink.Overv
     }
 
     @Override
-    public void pushTxs( String txs ) {
-        mTxs.postValue( txs );
+    public void pushError( Error e ) {
+
     }
 }

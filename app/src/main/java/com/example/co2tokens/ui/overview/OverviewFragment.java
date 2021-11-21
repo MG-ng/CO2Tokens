@@ -1,5 +1,7 @@
 package com.example.co2tokens.ui.overview;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,6 +11,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+
+import com.example.co2tokens.ApiLink;
 
 import org.co2tokens.app.databinding.FragmentOverviewBinding;
 
@@ -27,6 +31,12 @@ public class OverviewFragment extends Fragment {
 
         final TextView balanceOverview = binding.balanceOverview;
         overviewViewModel.getBalance().observe( getViewLifecycleOwner(), balanceOverview::setText );
+
+        binding.openInBrowser.setOnClickListener( view -> {
+            Uri uri = Uri.parse( "https://testnet.xchain.io/address/" + ApiLink.getAddress() );
+            Intent intent = new Intent( Intent.ACTION_VIEW, uri );
+            startActivity( intent );
+        } );
 
         // TODO: Put real txs in there
 //        final TextView txsView = binding.txs;

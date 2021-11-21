@@ -25,9 +25,9 @@ public class ApiLink {
 
     private static final String apiUrl = "https://api.counterparty.io:14001";
 
-    public static final String address = "mxJQUbCb2bsSKwwsnUsBW7PouTfnMsLxyt";
-    public static final String pubKey = "03b4dc8df83130205c93e789a543c4b298b0e64b5d4cb8365fca72f2aba880bcf4";
-    public static final String privateKey = "cSiDFNJ6EHkJXfBMDc8AWHcFoWghe4BToVHyvH16C6uzYyzeyf4P";
+    private static final String address = "mxJQUbCb2bsSKwwsnUsBW7PouTfnMsLxyt";
+    private static final String pubKey = "03b4dc8df83130205c93e789a543c4b298b0e64b5d4cb8365fca72f2aba880bcf4";
+    private static final String privateKey = "cSiDFNJ6EHkJXfBMDc8AWHcFoWghe4BToVHyvH16C6uzYyzeyf4P";
 
 
 
@@ -58,8 +58,11 @@ public class ApiLink {
         // TODO
     }
 
+    public static String getAddress() {
+        return address;
+    }
 
-    public void getBalance( OverviewCallback back, boolean unconfirmed ) {
+    public void getBalance( BalanceCallback back, boolean unconfirmed ) {
 
 //        $result = $client->execute('get_balances', array('filters' => array('field' => 'address', 'op' => '==', 'value' => '1NFeBp9s5aQ1iZ26uWyiK2AYUXHxs7bFmB')));
 //        print("get_balances result:\n");
@@ -125,7 +128,7 @@ public class ApiLink {
 
 // curl -X POST https://api.counterparty.io:14001 --user rpc:rpc -H 'Content-Type: application/json; charset=UTF-8' -H 'Accept: application/json, text/javascript' --data-binary '{"method":"get_balances","params":{"filters":[{"field":"address","op":"==","value":"mxJQUbCb2bsSKwwsnUsBW7PouTfnMsLxyt"}]},"jsonrpc":"2.0","id":0}'
 
-    public void getRunningJsonRPC( OverviewCallback back ){
+    public void getRunningJsonRPC( BalanceCallback back ){
 
         RequestQueue requestQueue = Volley.newRequestQueue( context );
 
@@ -170,12 +173,17 @@ public class ApiLink {
 
 
 
-
-    public interface OverviewCallback {
-        public void pushBalance( double balance );
-        public void pushTxs( String txs );
+    public interface ErrorCallback {
+        public void pushError( Error e );
     }
 
+    public interface BalanceCallback extends ErrorCallback {
+        public void pushBalance( double balance );
+    }
+
+    public interface TxsCallback extends ErrorCallback {
+        public void pushTxs( String txs );
+    }
 
 
 }
