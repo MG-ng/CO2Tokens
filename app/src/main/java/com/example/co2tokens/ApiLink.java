@@ -8,7 +8,6 @@ import android.util.Log;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
-import com.android.volley.Response;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 
@@ -25,6 +24,7 @@ public class ApiLink {
 
     private static final String apiUrl = "https://api.counterparty.io:14001";
 
+    private static final String asset = "A7953223131002272000";
     private static final String address = "mxJQUbCb2bsSKwwsnUsBW7PouTfnMsLxyt";
     private static final String pubKey = "03b4dc8df83130205c93e789a543c4b298b0e64b5d4cb8365fca72f2aba880bcf4";
     private static final String privateKey = "cSiDFNJ6EHkJXfBMDc8AWHcFoWghe4BToVHyvH16C6uzYyzeyf4P";
@@ -62,12 +62,17 @@ public class ApiLink {
         return address;
     }
 
+
+    private Map<String, String> getHeaders() {
+        HashMap<String, String> headers = new HashMap<>();
+        headers.put( "Content-Type", "application/json" );
+        String auth = "Basic " + Base64.encodeToString( "rpc:rpc".getBytes(), Base64.NO_WRAP );
+        headers.put( "Authorization", auth );
+        return headers;
+    }
+
+
     public void getBalance( BalanceCallback back, boolean unconfirmed ) {
-
-//        $result = $client->execute('get_balances', array('filters' => array('field' => 'address', 'op' => '==', 'value' => '1NFeBp9s5aQ1iZ26uWyiK2AYUXHxs7bFmB')));
-//        print("get_balances result:\n");
-//        var_dump($result);
-
         RequestQueue requestQueue = Volley.newRequestQueue( context );
 
         JSONObject postData = new JSONObject();
@@ -114,15 +119,121 @@ public class ApiLink {
             // Auth Header!
             @Override
             public Map<String, String> getHeaders() {
-                HashMap<String, String> headers = new HashMap<>();
-                headers.put( "Content-Type", "application/json" );
-                String auth = "Basic " + Base64.encodeToString( "rpc:rpc".getBytes(), Base64.NO_WRAP );
-                headers.put( "Authorization", auth );
-                return headers;
+                return ApiLink.this.getHeaders();
             }
         };
-
         requestQueue.add(jsonObjectRequest);
+    }
+
+    public void getCO2Balance( CO2BalanceCallback back ) {
+        RequestQueue requestQueue = Volley.newRequestQueue( context );
+
+        JSONObject postData = new JSONObject();
+        try {
+            postData.put( "method", "get_holders" );
+            JSONObject array = new JSONObject( "{ " +
+                    "'asset': '" + asset + "'" +
+                    "}] }" );
+
+            Log.d( TAG, array.toString() );
+            postData.put( "params", array );
+
+            postData.put( "jsonrpc", "2.0" );
+            postData.put( "id", 0 );
+
+            Log.i( TAG, "Given data holders: " + postData.toString() );
+
+        } catch ( JSONException e) {
+            e.printStackTrace();
+        }
+
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest( Request.Method.POST, apiUrl, postData,
+                response -> {
+                    Log.i( TAG, response.toString() );
+                    try {
+                        JSONArray holders = response.getJSONArray( "result" );
+
+                        Log.e( TAG, holders.toString() );
+
+                        double amount = 0;
+                        for( int i = 0; i < holders.length(); i++ ) {
+                            JSONObject obj = holders.getJSONObject( i );
+
+                            String objAddress = obj.getString( "address" );
+                            if( objAddress.equals( address ) ) {
+                                amount = obj.getLong( "address_quantity" );
+                                break;
+                            }
+                        }
+
+                        back.pushCO2Balance( amount / Math.pow( 10, 8 ) );
+
+                    } catch( JSONException e ) {
+                        e.printStackTrace();
+                    } catch( NullPointerException e ) {
+                        e.printStackTrace();
+                    }
+                },
+                Throwable::printStackTrace
+        ) {
+            // Auth Header!
+            @Override
+            public Map<String, String> getHeaders() {
+                return ApiLink.this.getHeaders();
+            }
+        };
+        requestQueue.add(jsonObjectRequest);
+    }
+
+    public void burnAmount( BurnCallback back, double amount ) {
+        RequestQueue requestQueue = Volley.newRequestQueue( context );
+
+        JSONObject postData = new JSONObject();
+        try {
+            postData.put( "method", "get_holders" );
+            JSONObject array = new JSONObject( "{ " +
+                    "'asset': '" + asset + "'" +
+                    "}] }" );
+
+            Log.d( TAG, array.toString() );
+            postData.put( "params", array );
+
+            postData.put( "jsonrpc", "2.0" );
+            postData.put( "id", 0 );
+
+            Log.i( TAG, "Given data holders: " + postData.toString() );
+
+        } catch ( JSONException e) {
+            e.printStackTrace();
+        }
+
+        back.pushBurnStatus( "Sent " + amount + "\n\nto 1CarbonDioxideBurnXXXXXXXXXXXSuHvy\n" );
+
+/* Not working yet
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest( Request.Method.POST, apiUrl, postData,
+                response -> {
+                    Log.i( TAG, response.toString() );
+                    try {
+                        JSONArray holders = response.getJSONArray( "result" );
+
+                        Log.e( TAG, holders.toString() );
+
+                    } catch( JSONException e ) {
+                        e.printStackTrace();
+                    } catch( NullPointerException e ) {
+                        e.printStackTrace();
+                    }
+                },
+                Throwable::printStackTrace
+        ) {
+            // Auth Header!
+            @Override
+            public Map<String, String> getHeaders() {
+                return ApiLink.this.getHeaders();
+            }
+        };
+        requestQueue.add(jsonObjectRequest);
+        */
     }
 
 
@@ -142,17 +253,14 @@ public class ApiLink {
         }
 
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest( Request.Method.POST, apiUrl, postData,
-                new Response.Listener<JSONObject>() {
-                    @Override
-                    public void onResponse( JSONObject response ) {
-                        Log.i( TAG, response.toString() );
-                        try {
-                            back.pushBalance( response.getDouble( "jsonrpc" ) );
-                        } catch( JSONException e ) {
-                            e.printStackTrace();
-                        } catch( NullPointerException e ) {
-                            e.printStackTrace();
-                        }
+                response -> {
+                    Log.i( TAG, response.toString() );
+                    try {
+                        back.pushBalance( response.getDouble( "jsonrpc" ) );
+                    } catch( JSONException e ) {
+                        e.printStackTrace();
+                    } catch( NullPointerException e ) {
+                        e.printStackTrace();
                     }
                 },
                 Throwable::printStackTrace
@@ -160,11 +268,7 @@ public class ApiLink {
             // Auth Header!
             @Override
             public Map<String, String> getHeaders() {
-                HashMap<String, String> headers = new HashMap<>();
-                headers.put("Content-Type", "application/json");
-                String auth = "Basic " + Base64.encodeToString( "rpc:rpc".getBytes(), Base64.NO_WRAP );
-                headers.put("Authorization", auth );
-                return headers;
+                return ApiLink.this.getHeaders();
             }
         };
 
@@ -174,15 +278,23 @@ public class ApiLink {
 
 
     public interface ErrorCallback {
-        public void pushError( Error e );
+        void pushError( Error e );
     }
 
     public interface BalanceCallback extends ErrorCallback {
-        public void pushBalance( double balance );
+        void pushBalance( double balance );
+    }
+
+    public interface CO2BalanceCallback extends ErrorCallback {
+        void pushCO2Balance( double balance );
     }
 
     public interface TxsCallback extends ErrorCallback {
-        public void pushTxs( String txs );
+        void pushTxs( String txs );
+    }
+
+    public interface BurnCallback extends ErrorCallback {
+        void pushBurnStatus( String status );
     }
 
 

@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -18,7 +17,22 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentLeft="true"
         android:text="You've got"
-         />
+        />
+
+    <ImageView
+        android:id="@+id/open_in_browser"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/double_margin"
+        android:layout_below="@id/balance_overview_title"
+        android:layout_above="@id/scroll_txs"
+        android:layout_toEndOf="@id/balance_overview_btc"
+        android:layout_toRightOf="@id/balance_overview_btc"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:src="@drawable/ic_baseline_open_in_browser_24"
+        android:contentDescription="Open Address In Browser"
+        />
 
     <TextView
         android:id="@+id/balance_overview_btc"
@@ -32,20 +46,6 @@
         android:layout_alignParentRight="true"
         android:text="Balance"
         />
-
-    <ImageView
-        android:id="@+id/open_in_browser"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:padding="@dimen/double_margin"
-        android:layout_below="@id/balance_overview_title"
-        android:layout_above="@id/scroll_txs"
-        android:layout_toRightOf="@id/balance_overview_btc"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentLeft="true"
-        android:src="@drawable/ic_baseline_open_in_browser_24"
-        />
-
 
     <TextView
         android:id="@+id/balance_overview_CO2t"

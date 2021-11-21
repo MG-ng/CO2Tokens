@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
@@ -28,6 +29,19 @@ public class BurnFragment extends Fragment {
 
         final TextView availableView = binding.burnAvailable;
         burnViewModel.getAvailable().observe( getViewLifecycleOwner(), availableView::setText );
+        burnViewModel.getBurnStatus().observe( getViewLifecycleOwner(), status -> {
+            AlertDialog.Builder alert = new AlertDialog.Builder( getContext() );
+            alert.setTitle( "Burning Successful!" );
+            alert.setMessage( status );
+            alert.setCancelable( true );
+            alert.show();
+        });
+
+        binding.burnConfirm.setOnClickListener( view -> {
+            double amount = Integer.parseInt( String.valueOf( binding.burnAmount.getText() ) );
+            burnViewModel.burnAmt( amount );
+        } );
+
 
         return root;
     }

@@ -30,10 +30,10 @@ public class OverviewFragment extends Fragment {
         View root = binding.getRoot();
 
         final TextView balanceOverviewBTC = binding.balanceOverviewBtc;
-        overviewViewModel.getBalance().observe( getViewLifecycleOwner(), text -> balanceOverviewBTC.setText( text + " BTC" ) );
+        overviewViewModel.getBalance().observe( getViewLifecycleOwner(), balanceOverviewBTC::setText );
 
-        final TextView balanceOverviewCO2 = binding.balanceOverviewBtc;
-        overviewViewModel.getBalance().observe( getViewLifecycleOwner(), text -> balanceOverviewCO2.setText( text + " CO2T" ) );
+        final TextView balanceOverviewCO2 = binding.balanceOverviewCO2t;
+        overviewViewModel.getCO2Balance().observe( getViewLifecycleOwner(), balanceOverviewCO2::setText );
 
         binding.openInBrowser.setOnClickListener( view -> {
             Uri uri = Uri.parse( "https://testnet.xchain.io/address/" + ApiLink.getAddress() );
