@@ -15,6 +15,8 @@ public class OverviewViewModel extends AndroidViewModel implements ApiLink.Overv
     private MutableLiveData<String> mBalance;
     private MutableLiveData<String> mTxs;
 
+
+
     public OverviewViewModel( Application application ) {
         super( application );
 
@@ -26,7 +28,7 @@ public class OverviewViewModel extends AndroidViewModel implements ApiLink.Overv
 
         link = ApiLink.getInstance( getApplication().getApplicationContext() );
 
-        link.getBalance( this );
+        link.getBalance( this, true );
     }
 
     public LiveData<String> getBalance() {
